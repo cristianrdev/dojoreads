@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Añadir libro y Review</title>
+</head>
+
+<body>
+    {% include "user_info.html" %}
+
+    <div class="container">
+        <a href="/">Atrás</a>
+        <div class="row">
+
+            
+            <form action='new_book' id='formRegister' method='post' class="col-md-6 bg-light p-2">
+                <h3 class=" text-center">Añadir nuevo libro y su review:</h3>
+
+                {% csrf_token %}
+                <p> Titulo: {{ bookform.title }} </p>
+
+
+                <div class="row bg-light m-1 border p-1">
+                    <p>Autor</p>
+                    Elija un autor de la lista:
+                    <select name="author" id="" class="form-control" style="resize: none; width: 40%;">
+                        <option disabled selected value> -- Seleccione Autor -- </option>
+                        {% for author in all_authors%}
+                        <option value="{{author.name}}">{{author.name}}</option>
+                        {% endfor %}
+                    </select>
+                    {{authorform}}
+                </div>
+
+                <p>Review: {{ reviewform.review }}</p>
+                <p>Rating: {{ reviewform.rating }}</p>
+
+         
+
+
+
+                <button type='submit' class="btn btn-primary col-sm-3 m-2">Añadir libro</button>
+            </form>
+        </div>
+
+        <a href="/">Atrás</a>
+    </div>
+</body>
+
+</html>

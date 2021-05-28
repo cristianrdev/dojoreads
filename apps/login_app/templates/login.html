@@ -1,0 +1,28 @@
+{% block content %}
+
+<div class="col-md-5  ">
+    <div class="row">
+
+
+        <form action='login' id='formLogin' method='post' class="bg-info m-4 p-3 rounded">
+            <h3>Para Usuarios Registrados:</h3>
+            <div class="form-group">
+                {% csrf_token %}
+                {{ loginForm.as_p }}
+                <button type='submit' class="btn btn-secondary">Entrar</button>
+            </div>
+
+            {% if message_login_failed %}
+            <div class="text-danger bg-light">
+                {{message_login_failed}}
+            </div>
+
+            {% endif %}
+
+        </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

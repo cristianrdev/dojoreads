@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Detalle del libro</title>
+</head>
+
+<body>
+
+    {% include "user_info.html" %}
+
+    <div class="container">
+        <a href="/books">Atrás</a>
+        <div class="row ">
+            <h3 class="">Titulo: {{this_book.title}}</h3>
+            <p class="">Autor: {{this_author.name}}</p>
+            <p>Libro subido por: {{this_book.uploaded_by.first_name}}</p>
+        </div>
+
+
+
+
+        <div class="row">
+
+            <div class="col bg-light rounded">
+                <h3 class="text-center">Reviews de este libro :</h3>
+                {% for reviews in all_reviews_of_this_book%}
+                <div class="row p-1 m-3 border bg-white rounded">
+
+                    
+                    <div>
+ 
+                        Rating :  <img src="/static/{{reviews.rating}}.jpg" alt="rating" width="16%" class="">
+                    </div>
+                   
+                    <p><a href=""> {{reviews.uploaded_by.first_name}}</a> comentó: {{reviews.review}}</p>
+                    <p>Publicado : {{reviews.created_at}}</p>
+                    {% if active_user.id == reviews.uploaded_by.id %}
+                    <a href="/books/{{this_book.id}}/delete_review/{{reviews.id}}">Eliminar mi review</a>
+                    {% endif %}
+
+                </div>
+                {% endfor %}
+            </div>
+
+
+
+            <div class="col bg-info m-3 rounded ">
+                <div class=" ">
+                    {% if user_review_this_book == True %}
+
+                    <h3 class="text-white text-center ">Ya ha ingresado un review para este libro</h3>
+                    {% else %}
+                   
+                    <form action="/books/add_review/{{this_book.id}}" method="post" class="">
+                        {% csrf_token %}
+                        Escriba su review : {{review_form.review}}
+                        Su rating : {{review_form.rating}}
+                        <button type='submit' class="btn btn-light col-sm-3 m-2">Añadir review</button>
+                    </form>
+                    {% endif%}
+                </div>
+            </div>
+
+        {% if user_upload_this_book == True %}
+            <a href="/books/delete_book/{{this_book.id}}" class="link-danger">Eliminar este libro</a>
+        {% endif %}
+        </div>
+
+        <a href="/books" >Atrás</a>
+    </div>
+
+
+</body>
+
+</html>

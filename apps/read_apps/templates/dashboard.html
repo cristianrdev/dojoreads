@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+
+
+    <title>Dashboard</title>
+</head>
+
+<body>
+    {% include "user_info.html" %}
+
+    <div class="container">
+        <a href="new_book" class="btn btn-success m-3">Añadir nuevo libro y review</a> 
+        
+        <div class="row">
+            <div class="col bg-primary p-2 rounded">
+                <h3 class="text-center text-white">Ultimos Reviews:</h3>
+                {% for reviews in all_reviews %}
+                <div class="border m-1 p-1 rounded bg-white">
+                    <a href="book_detail/{{reviews.book.id}}" class="link-primary">{{reviews.book.title}}</a>
+                    <p></p>
+                    Rating :
+                    <div>
+                        <img src="/static/{{reviews.rating}}.jpg" alt="rating" width="16%" class="">
+                    </div>
+
+
+
+                    <a href="/books/user_detail/{{reviews.uploaded_by.id}}">{{reviews.uploaded_by.first_name}}</a> dijo: {{reviews.review}}
+                </div>
+                {% endfor %}
+
+
+            </div>
+
+
+            <div class="col-sm-1">
+
+            </div>
+            <div class="col .bg-light ">
+                <h3 class="text-center">Todos los libros:</h3>
+                
+                <div class="" style="max-height: 300px ; overflow-y: scroll;">
+
+                    {% for book in all_books %}
+                    <a href="book_detail/{{book.id}}" class="info">{{book.title}}</a><br>
+                    {% endfor %}
+                </div>
+
+
+               
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+      
+</body>
+
+</html>

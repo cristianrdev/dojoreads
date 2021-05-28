@@ -1,0 +1,14 @@
+
+{% block content %}
+
+<div class="text-center bg-secondary text-white">
+    <h1>DojoReads </h1>
+</div>
+<div class="bg-light m-4 p-3 text-secondary d-flex justify-content-around">
+    <p class="">Hola, {{active_user.first_name}} {{active_user.last_name}}</p> <a href="/logout" class="">Cerrar
+        sesión</a>
+
+</div>
+
+
+{% endblock %}

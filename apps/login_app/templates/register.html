@@ -1,0 +1,17 @@
+{% block content %}
+
+
+<div class="col-md-5 bg-light m-4 p-3 rounded text-secondary">
+    <h3>Registrese Acá:</h3>
+
+    <form action='register' id='formRegister' method='post'>
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type='submit' class="btn btn-primary col-sm-3 m-2">Registrarse</button>
+    </form>
+
+</div>
+
+
+{% endblock %}
